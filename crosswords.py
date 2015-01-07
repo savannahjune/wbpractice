@@ -3,6 +3,11 @@ import sys
 def fillCrossword():
 	pass
 
+
+class Dash(object):
+	def __init__(self):
+		
+
 line_number = 0 
 last_line = ''   
 for line in sys.stdin:

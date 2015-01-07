@@ -12,10 +12,10 @@ def findEmail(N):
 				formatted_emails = formatted_emails + item + ';'
 			else: 
 				pass
-    	else: 
-    		if item not in formatted_emails:
+		else: 
+			if item not in formatted_emails:
 				formatted_emails = formatted_emails + item + ';'
-			else: 
+			else:
 				pass
 
 	formatted_emails = formatted_emails[:-1]
