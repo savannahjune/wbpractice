@@ -1,4 +1,4 @@
-class Node:
+class Node(object):
 	def __init__(self, data, next):
 		self.data = data
 		self.next = next
@@ -12,11 +12,17 @@ def prnt(node):
 # Iterative
 def reverse(node):
 	last = None
+	next = None
 	current = node
 
 	while(current is not None):
+		# keep track of the current.next for next batch
 		next = current.next
+		# reversing pointer on your current node
 		current.next = last
+		# creating conditions for next step through for next go round
+		# last will be the node you are currently manipulating
+		# and current will be the next node that you kept track of in line 19
 		last = current
 		current = next
 

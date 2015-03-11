@@ -1,0 +1,129 @@
+cracking the code interview 
+
+Preperation:
+
+- become very comfortable with data structures and algorithm
+- interviews are about how well you can solve a new problem you haven't seen before
+	- know the data structures, algorithms, concepts
+		- make them all by scratch, b/c interviews will make you think about the in a newer
+		more complicated way
+- understand not memorize, take the process and regenerate the code
+- you'll be asked to translate an algorithm
+- Big O time and space is very important, need to be fluid
+	- common mistakes: RUNTIME compute sum of two arrays
+		-what is the run time of that in big O: O (a + b) so how many are in both elements
+		- can say On where n is the sum of the length of both arrays
+		- sorting two strings, n * n log n, first n is the number of strings, last two ns are the length of one string
+		- if there are multiple n's use a variable not n, be more specific
+		- a is length of array s is the length of the strings so a * s log s
+	RECURSIVE RUNTIMES
+	def fibonacci(n):
+		if n < 1:
+	        return 0
+	    if n == 1:
+	        return 1
+
+	    return fibonacci(n - 1) + fibonacci(n - 2)
+    
+	fibonacci(6)
+
+	draw a 'call tree' walking through what the function will do
+	- tree is n tall so 6, then look at the nodes on each level
+	- which is 1, 2, x2 of previous, x2 of previous, x2 of previous so that is 2 to the n 2 to the n = 2x2x2...2 n times
+	- 2 to the n is really, really slow, print a counter along the way to see the trend 
+	- in many cases the runtime is the #branches to the #depth like in this case
+	- you are computing the same thing twice, so would be better to store somewhere like in a hash table so now it's 2n = O(n)
+		- caching is memo-ization, caching things in a memo table
+
+FIND ELEMENTS IN COMMON between two arrays
+- arrays are sorted  - interviewer is saying that because the optimized version uses this information
+
+a1 = [-1, 2, 3, 4, 6, 20]
+a2 = [0, 3, 5, 7, 20]
+
+	- want them to not be the same length
+	- has negatives and a zero
+	- multiple elements in common
+	- different indexes for elements in common
+
+-pay super close attention to parameters
+
+IN A WORLD WHERE SOME PEOPLE KNOW SOME PEOPLE / CELEBRITY
+- celebrities - person everyone knows but knows nobody
+- how do you find a celebrity
+- draw a visual graph of this
+- there can only be one celebrity if celebrities can't know celebrities
+- but the interviewer never mentioned if celebrities can know celebrities
+- draw a good example but be super careful about your assumptions
+- don't make the answer/thing you are looking for the first element
+
+MAKE A BRUTE FORCE / NAIVE and them improve upon them
+
+- shows them that you can do it, it's a good starting point and optimize from there
+- for celebrity you have to check each person against their relationship to all - O n^2, then make it better
+	- try to get to best conceivable runtime
+
+- sorting is n log n, to find out what every element is you must talk to all (n) so it is already O of n so that's best conceivable for celebrity
+- can't be worse than O of n^2, can't be better than O of n
+- in between is n log n, think about how the n can be transformed - comes out when the data is sorted, or in a tree 
+- n divded by 2 continuously is log that is why binary search is log n, think diving in half
+
+THREE THINGS TO LOOK FOR TO OPTOMIZE
+- bottleneks
+- unneccessary work
+- duplicate work
+- BUD
+- good exercise for that - find all the string that match a small string within a large string, print indices instead of printing permutations
+	- worst runtime for string s and b (small and big) then it's s * b if you have to print the permutations, but if you only have to print indices
+	then it can be O of b instead of O of b * s
+- anagram server, given a word, you want all the anagrams of that word (permutations in a dictionary), have to print the actual anagrams
+	- why did they say server? it changes the problem because you can cache values, and it's implicit that you're doing this multiple times if it's a server
+	- you'll have a lot more space as long as things aren't excessive
+	- you have to turn on the server, but if it's a function you don't have to do that
+	- things are happening repeatedly, you can pre-compute
+	- sort the dictionary, so all anagrams become the same
+	- group them all together, dog and god in one set, odg is a sorted type, mapped to each other, then you can get results nearly immediately
+
+-with celebrity example, you'd have functions like knows(1, 2) reutrns T or F
+	- if knows(1,3) true then 1 is not a celebrity, knows(1,2) is false so 2 is not a celebrity
+	- if you do knows(1,4) that's unneccessary because you know it's not a celebrity
+	- then knows (4,5) then five is not a celebrity, knows(4, 6) is false, so 6 not celebrity
+	- so now you know that 4 is 'probably' the celebrity but it could be a special case that made it quick
+	- could be 'unattached' people, or NO celebrities
+	- make sure everyone knows 4 and that 4 knows nobody - so that is 2n checks, or 0 of n time
+	- this is a validation step, and it's O of n time, so won't change runtime because O of n times two is O of n
+	- play with example to see if you can get a much slower runtime to check if you got lucky
+		- no matter what i'm eleminating one person,so you did not get lucky
+		- there is a pattern though and you can see it in a for loop
+		p = 1
+		for (q=2; q<= n ; q++)
+			if knows(p, q):
+				p=q
+
+OTHER TIPS
+	- start in the upper left as high as you can reach b/c you'll need the space
+	- right straight include tabs
+	- use awesome variable names, be specific, make it maintainable
+	- modularize from the very beginning
+	- def findCeleb (n):
+		cand = findCanddidate(n)
+		if validate(cand):
+			return cand
+		return 
+	- punt on obnoxious details, get to the meat of the algorithm
+	- just call sort if there is an algorithm that needs sorting to get to the interesting part
+	- if you are getting confused, make sure you understand your algorithm first before moving on
+
+TESTING
+
+- look for the spots where you are most likely to make an error, boolean statements, arithmetic, etc.
+- use small examples for speed
+- look for lines that are most likely to cause a bug
+- the scary lines: look odd, are very complex
+
+SHOW PASSION - BE EXCITED
+
+- then the interviewer will want to work with you
+- may give you hints
+
+
